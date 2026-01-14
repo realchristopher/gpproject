@@ -17,6 +17,13 @@ const VerticalDivider = ({ className }: { className?: string }) => (
   <div className={`w-[1px] bg-primary/20 h-full ${className}`} />
 );
 
+// Perspective Badge Component
+const PerspectiveBadge = ({ label, color }: { label: string; color: string }) => (
+  <span className={`inline-block px-3 py-1 text-xs font-paragraph tracking-wider uppercase ${color} rounded-full`}>
+    {label}
+  </span>
+);
+
 // --- Hero Section (Inspiration Image Replica) ---
 
 const Hero = () => {
@@ -91,8 +98,8 @@ const Hero = () => {
           <motion.div style={{ y: yImageSlow }} className="relative w-full h-[60vh] lg:h-[80vh] mt-12 lg:mt-0">
             <div className="absolute inset-0 overflow-hidden">
               <Image 
-                src="https://static.wixstatic.com/media/d79cde_1291ffe797d740a484f61d5bf45557f2~mv2.png?originWidth=1280&originHeight=704"
-                alt="Economic landscape visualization"
+                src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1200&h=1600&fit=crop"
+                alt="Nigerian economic landscape"
                 className="w-full h-full object-cover scale-110"
                 width={800}
               />
@@ -102,8 +109,8 @@ const Hero = () => {
           <motion.div style={{ y: yImageFast }} className="relative w-full h-[60vh] lg:h-[80vh] lg:-mt-24">
              <div className="absolute inset-0 overflow-hidden">
               <Image 
-                src="https://static.wixstatic.com/media/d79cde_ad04e45178f64635aeafdb4913cc0d9a~mv2.png?originWidth=1280&originHeight=704"
-                alt="Resource distribution chart abstract"
+                src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?w=1200&h=1600&fit=crop"
+                alt="Financial data and analysis"
                 className="w-full h-full object-cover scale-110"
                 width={800}
               />
@@ -192,8 +199,8 @@ const ImpactVisual = () => {
     <section ref={ref} className="relative w-full h-[80vh] overflow-hidden flex items-center justify-center bg-secondary">
       <motion.div style={{ scale, opacity }} className="absolute inset-0 w-full h-full">
         <Image 
-          src="https://static.wixstatic.com/media/d79cde_0a2e898d4ec14aa9adac508197809b43~mv2.png?originWidth=1280&originHeight=640"
-          alt="Abstract representation of financial flow"
+          src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1600&h=900&fit=crop"
+          alt="Nigerian cityscape and infrastructure"
           className="w-full h-full object-cover opacity-40 grayscale"
         />
       </motion.div>
@@ -291,6 +298,177 @@ const ProjectComponents = () => {
   );
 };
 
+// --- Multi-Perspective Section (Global, National, Local) ---
+
+const MultiPerspective = () => {
+  const perspectives = [
+    {
+      level: "Global",
+      badge: "bg-primary/10 text-primary",
+      title: "International Context",
+      content: "Nigeria ranks 145th out of 180 countries in Transparency International's 2023 Corruption Perceptions Index. This places the nation among the most corrupt globally, affecting foreign investment, international aid distribution, and global economic partnerships. The World Bank estimates that corruption costs developing nations like Nigeria up to $1 trillion annually in lost economic growth.",
+      icon: <Globe className="w-8 h-8" />
+    },
+    {
+      level: "National",
+      badge: "bg-secondary text-secondary-foreground",
+      title: "Federal Impact",
+      content: "At the national level, corruption manifests through embezzlement of public funds, contract inflation, and mismanagement of oil revenues. The Nigerian Economic and Financial Crimes Commission (EFCC) reports that between 2016-2020, over ₦1.3 trillion was recovered from corrupt officials. Yet, this represents only a fraction of estimated losses. National infrastructure projects face chronic delays and cost overruns, with funds diverted from healthcare, education, and essential services.",
+      icon: <Scale className="w-8 h-8" />
+    },
+    {
+      level: "Local",
+      badge: "bg-accent text-accent-foreground",
+      title: "Community Effects",
+      content: "Local communities bear the most direct consequences of corruption. Citizens face daily challenges: non-functional healthcare facilities, deteriorating roads, inadequate water supply, and underfunded schools. In rural areas, ghost worker schemes drain local government budgets while essential services remain unfunded. Small businesses struggle with extortion and bribery demands, stifling entrepreneurship and economic mobility at the grassroots level.",
+      icon: <TrendingDown className="w-8 h-8" />
+    }
+  ];
+
+  return (
+    <section className="w-full py-32 px-6 md:px-12 lg:px-20 bg-background">
+      <div className="max-w-[120rem] mx-auto">
+        <motion.div 
+          className="mb-20 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="font-heading text-5xl md:text-7xl text-primary mb-6">
+            Multi-Level Perspectives
+          </h2>
+          <p className="font-paragraph text-lg text-primary/70 max-w-3xl mx-auto">
+            Understanding corruption requires examining its impact across global, national, and local dimensions.
+          </p>
+        </motion.div>
+
+        <div className="space-y-16">
+          {perspectives.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.15, duration: 0.8 }}
+              className="relative"
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div className="lg:col-span-3 flex flex-col gap-4">
+                  <PerspectiveBadge label={item.level} color={item.badge} />
+                  <div className="flex items-center gap-4">
+                    <div className="text-primary">
+                      {item.icon}
+                    </div>
+                    <h3 className="font-heading text-3xl text-primary">
+                      {item.title}
+                    </h3>
+                  </div>
+                </div>
+                
+                <div className="lg:col-span-9">
+                  <div className="p-8 bg-accent/30 border-l-4 border-primary">
+                    <p className="font-paragraph text-base md:text-lg text-primary leading-relaxed">
+                      {item.content}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// --- Solutions Section ---
+
+const Solutions = () => {
+  const solutions = [
+    {
+      category: "Institutional Reform",
+      items: [
+        "Strengthen anti-corruption agencies with operational independence and adequate funding",
+        "Implement transparent public procurement systems with digital tracking",
+        "Establish whistleblower protection programs with guaranteed anonymity"
+      ]
+    },
+    {
+      category: "Technological Innovation",
+      items: [
+        "Deploy blockchain technology for government financial transactions",
+        "Create public databases for contract awards and budget allocations",
+        "Utilize AI-powered systems to detect irregular spending patterns"
+      ]
+    },
+    {
+      category: "Legal & Judicial",
+      items: [
+        "Fast-track corruption cases through specialized courts",
+        "Enforce asset declaration requirements for public officials",
+        "Implement stricter penalties including asset forfeiture and lengthy prison terms"
+      ]
+    },
+    {
+      category: "Civic Engagement",
+      items: [
+        "Promote civic education on citizens' rights and anti-corruption mechanisms",
+        "Support investigative journalism and media freedom",
+        "Encourage community-based monitoring of local government projects"
+      ]
+    }
+  ];
+
+  return (
+    <section id="solutions" className="w-full py-32 px-6 md:px-12 lg:px-20 bg-secondary text-secondary-foreground">
+      <div className="max-w-[120rem] mx-auto">
+        <motion.div
+          className="mb-20"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="font-heading text-5xl md:text-7xl mb-6">
+            Potential Solutions
+          </h2>
+          <p className="font-paragraph text-lg opacity-80 max-w-3xl leading-relaxed">
+            Addressing corruption in Nigeria requires a comprehensive, multi-faceted approach combining institutional reform, technological innovation, legal enforcement, and civic participation.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {solutions.map((solution, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
+              className="border border-secondary-foreground/20 p-8 hover:border-secondary-foreground/40 transition-colors duration-300"
+            >
+              <h3 className="font-heading text-3xl mb-6 pb-4 border-b border-secondary-foreground/20">
+                {solution.category}
+              </h3>
+              <ul className="space-y-4">
+                {solution.items.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <ChevronRight className="w-5 h-5 mt-1 flex-shrink-0 text-secondary-foreground/60" />
+                    <span className="font-paragraph text-base leading-relaxed">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // --- Methodology Section ---
 
 const Methodology = () => {
@@ -378,6 +556,8 @@ export default function HomePage() {
         <SectionDivider />
         <ResearchQuestion />
         <ImpactVisual />
+        <MultiPerspective />
+        <Solutions />
         <ProjectComponents />
         <Methodology />
       </main>

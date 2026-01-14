@@ -11,6 +11,7 @@ export default function Header() {
     { path: '/case-studies', label: 'Case Studies' },
     { path: '/data-analysis', label: 'Data & Analysis' },
     { path: '/sources', label: 'Sources' },
+    { path: '/#solutions', label: 'Solutions' },
   ];
 
   return (

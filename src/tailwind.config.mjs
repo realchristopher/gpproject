@@ -23,15 +23,17 @@ export default {
                 paragraph: "futura-lt-w01-book"
             },
             colors: {
-                buttonbackground: '#D9D2C9',
-                buttonborder: '#000000',
+                buttonbackground: '#008751',
+                buttonborder: '#008751',
                 destructive: '#DF3131',
                 destructiveforeground: '#FFFFFF',
-                background: '#B7AEA3',
-                secondary: '#1A1A1A',
+                background: '#FFFFFF',
+                secondary: '#008751',
                 'secondary-foreground': '#FFFFFF',
                 'primary-foreground': '#FFFFFF',
-                primary: '#000000'
+                primary: '#008751',
+                accent: '#F0F0F0',
+                'accent-foreground': '#008751'
             },
         },
     },
