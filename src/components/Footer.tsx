@@ -22,8 +22,8 @@ export default function Footer() {
             </h4>
             <div className="font-paragraph text-base text-secondary-foreground/80 space-y-2">
               <p>Grade 10 IGCSE</p>
-              <p>Global Perspectives Course</p>
-              <p>Academic Year 2025-2026</p>
+              <p>{"Global Perps"}</p>
+
             </div>
           </div>
         </div>
