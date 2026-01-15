@@ -1,10 +1,17 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, X, Moon, Sun } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useThemeStore } from '@/stores/themeStore';
 
 export default function Header() {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isDarkMode, toggleTheme } = useThemeStore();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navLinks = [
     { path: '/', label: 'Home' },
@@ -38,16 +45,46 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            
+            {/* Theme Toggle Button - Desktop */}
+            {mounted && (
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-full hover:bg-accent transition-colors duration-300"
+                aria-label="Toggle theme"
+              >
+                {isDarkMode ? (
+                  <Sun className="w-5 h-5 text-primary" />
+                ) : (
+                  <Moon className="w-5 h-5 text-primary" />
+                )}
+              </button>
+            )}
           </nav>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-primary"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="md:hidden flex items-center gap-4">
+            {mounted && (
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-full hover:bg-accent transition-colors duration-300"
+                aria-label="Toggle theme"
+              >
+                {isDarkMode ? (
+                  <Sun className="w-5 h-5 text-primary" />
+                ) : (
+                  <Moon className="w-5 h-5 text-primary" />
+                )}
+              </button>
+            )}
+            <button
+              className="text-primary"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
